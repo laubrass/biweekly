@@ -1,23 +1,13 @@
 package biweekly.component;
 
-import java.util.Arrays;
-import java.util.List;
-
 import biweekly.ICalVersion;
 import biweekly.Warning;
 import biweekly.parameter.Related;
-import biweekly.property.Action;
-import biweekly.property.Attachment;
-import biweekly.property.Attendee;
-import biweekly.property.DateDue;
-import biweekly.property.DateEnd;
-import biweekly.property.DateStart;
-import biweekly.property.Description;
-import biweekly.property.DurationProperty;
-import biweekly.property.Repeat;
-import biweekly.property.Summary;
-import biweekly.property.Trigger;
+import biweekly.property.*;
 import biweekly.util.Duration;
+
+import java.util.Arrays;
+import java.util.List;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -83,6 +73,10 @@ import biweekly.util.Duration;
  * getter/setter method Javadocs because vCal does not use the VALARM component.
  */
 public class VAlarm extends ICalComponent {
+
+	public VAlarm() {
+		super();
+	}
 	/**
 	 * Creates a new alarm. Consider using one of the static factory methods
 	 * instead.

@@ -1,50 +1,16 @@
 package biweekly.component;
 
-import static biweekly.property.ValuedProperty.getValue;
+import biweekly.ICalVersion;
+import biweekly.Warning;
+import biweekly.property.*;
+import biweekly.util.Duration;
+import biweekly.util.ICalDate;
+import biweekly.util.Recurrence;
 
 import java.util.Date;
 import java.util.List;
 
-import biweekly.ICalVersion;
-import biweekly.Warning;
-import biweekly.property.Attachment;
-import biweekly.property.Attendee;
-import biweekly.property.Categories;
-import biweekly.property.Classification;
-import biweekly.property.Color;
-import biweekly.property.Comment;
-import biweekly.property.Conference;
-import biweekly.property.Contact;
-import biweekly.property.Created;
-import biweekly.property.DateEnd;
-import biweekly.property.DateStart;
-import biweekly.property.DateTimeStamp;
-import biweekly.property.Description;
-import biweekly.property.DurationProperty;
-import biweekly.property.ExceptionDates;
-import biweekly.property.ExceptionRule;
-import biweekly.property.Geo;
-import biweekly.property.Image;
-import biweekly.property.LastModified;
-import biweekly.property.Location;
-import biweekly.property.Method;
-import biweekly.property.Organizer;
-import biweekly.property.Priority;
-import biweekly.property.RecurrenceDates;
-import biweekly.property.RecurrenceId;
-import biweekly.property.RecurrenceRule;
-import biweekly.property.RelatedTo;
-import biweekly.property.RequestStatus;
-import biweekly.property.Resources;
-import biweekly.property.Sequence;
-import biweekly.property.Status;
-import biweekly.property.Summary;
-import biweekly.property.Transparency;
-import biweekly.property.Uid;
-import biweekly.property.Url;
-import biweekly.util.Duration;
-import biweekly.util.ICalDate;
-import biweekly.util.Recurrence;
+import static biweekly.property.ValuedProperty.getValue;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -1050,6 +1016,14 @@ public class VEvent extends ICalComponent {
 		return getProperties(Attachment.class);
 	}
 
+	public void setAttachments(List<Attachment> attachments) {
+		if (null != attachments && !attachments.isEmpty()) {
+			for (Attachment attachment : attachments) {
+				addAttachment(attachment);
+			}
+		}
+	}
+
 	/**
 	 * Adds an attachment to the event.
 	 * @param attachment the attachment to add
@@ -1443,6 +1417,15 @@ public class VEvent extends ICalComponent {
 	 */
 	public List<VAlarm> getAlarms() {
 		return getComponents(VAlarm.class);
+	}
+
+
+	public void setAlarms(List<VAlarm> alarms) {
+		if (null != alarms && !alarms.isEmpty()) {
+			for (VAlarm attachment : alarms) {
+				addAlarm(attachment);
+			}
+		}
 	}
 
 	/**

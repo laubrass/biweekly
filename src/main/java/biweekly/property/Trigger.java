@@ -1,15 +1,15 @@
 package biweekly.property;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import biweekly.ICalVersion;
 import biweekly.Warning;
 import biweekly.component.ICalComponent;
 import biweekly.parameter.Related;
 import biweekly.util.Duration;
+
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -60,6 +60,10 @@ import biweekly.util.Duration;
 public class Trigger extends ICalProperty {
 	private Duration duration;
 	private Date date;
+
+	public Trigger() {
+		super();
+	}
 
 	/**
 	 * Creates a trigger property.

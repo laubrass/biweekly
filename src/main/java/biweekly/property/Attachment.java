@@ -1,13 +1,13 @@
 package biweekly.property;
 
+import biweekly.ICalVersion;
+import biweekly.Warning;
+import biweekly.component.ICalComponent;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import biweekly.ICalVersion;
-import biweekly.Warning;
-import biweekly.component.ICalComponent;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -69,6 +69,10 @@ import biweekly.component.ICalComponent;
  */
 public class Attachment extends BinaryProperty {
 	private String contentId;
+
+	public Attachment() {
+		super("");
+	}
 
 	/**
 	 * Creates a new attachment.
