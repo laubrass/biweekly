@@ -1,8 +1,8 @@
 package biweekly.property;
 
-import java.util.List;
-
 import biweekly.parameter.Feature;
+
+import java.util.List;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -60,6 +60,13 @@ public class Conference extends ICalProperty {
 			return Feature.get(parameterValue);
 		}
 	};
+
+	/**
+	 * Default constructor for persistence
+	 */
+	public Conference() {
+
+	}
 
 	/**
 	 * Creates a conference property.

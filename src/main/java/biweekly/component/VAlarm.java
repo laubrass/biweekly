@@ -76,6 +76,15 @@ public class VAlarm extends ICalComponent {
 
 	public VAlarm() {
 		super();
+		setUid(Uid.random());
+	}
+
+	public Uid getUid() {
+		return getProperty(Uid.class);
+	}
+
+	public void setUid(Uid uid) {
+		setProperty(Uid.class, uid);
 	}
 	/**
 	 * Creates a new alarm. Consider using one of the static factory methods
@@ -86,6 +95,7 @@ public class VAlarm extends ICalComponent {
 	public VAlarm(Action action, Trigger trigger) {
 		setAction(action);
 		setTrigger(trigger);
+		setUid(Uid.random());
 	}
 
 	/**
@@ -94,6 +104,7 @@ public class VAlarm extends ICalComponent {
 	 */
 	public VAlarm(VAlarm original) {
 		super(original);
+		setUid(Uid.random());
 	}
 
 	/**
@@ -183,6 +194,14 @@ public class VAlarm extends ICalComponent {
 	 */
 	public List<Attachment> getAttachments() {
 		return getProperties(Attachment.class);
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		if (null != attachments && !attachments.isEmpty()) {
+			for (Attachment attachment : attachments) {
+				addAttachment(attachment);
+			}
+		}
 	}
 
 	/**
@@ -347,6 +366,14 @@ public class VAlarm extends ICalComponent {
 	 */
 	public List<Attendee> getAttendees() {
 		return getProperties(Attendee.class);
+	}
+
+	public void setAttendees(List<Attendee> attendees) {
+		if (null != attendees && !attendees.isEmpty()) {
+			for (Attendee attendee : attendees) {
+				addAttendee(attendee);
+			}
+		}
 	}
 
 	/**

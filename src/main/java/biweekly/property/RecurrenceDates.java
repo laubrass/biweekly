@@ -1,16 +1,13 @@
 package biweekly.property;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import biweekly.ICalVersion;
 import biweekly.Warning;
 import biweekly.component.ICalComponent;
 import biweekly.util.ICalDate;
 import biweekly.util.Period;
+
+import java.sql.Timestamp;
+import java.util.*;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -83,6 +80,20 @@ public class RecurrenceDates extends ICalProperty {
 	public RecurrenceDates() {
 		dates = new ArrayList<ICalDate>();
 		periods = new ArrayList<Period>();
+		setUid(Uid.random().getValue());
+	}
+
+	public String getUid() {
+		String uid = getParameter("Uid");
+		if (uid == null) {
+			setUid(Uid.random().getValue());
+			uid = getParameter("Uid");
+		}
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		setParameter("Uid", uid);
 	}
 
 	/**
@@ -91,6 +102,7 @@ public class RecurrenceDates extends ICalProperty {
 	 */
 	public RecurrenceDates(RecurrenceDates original) {
 		super(original);
+		setUid(Uid.random().getValue());
 
 		dates = new ArrayList<ICalDate>(original.dates.size());
 		for (ICalDate date : original.dates) {
@@ -109,6 +121,20 @@ public class RecurrenceDates extends ICalProperty {
 	 */
 	public List<ICalDate> getDates() {
 		return dates;
+	}
+
+	public List<Timestamp> getConvertedDates() {
+		List<Timestamp> stamps = new ArrayList<>();
+		for (ICalDate date : dates) {
+			stamps.add(Timestamp.from(date.toInstant()));
+		}
+		return stamps;
+	}
+
+	public void setConvertedDates(List<Timestamp> stamps) {
+		for (Timestamp stamp : stamps) {
+			addDate(stamp);
+		}
 	}
 
 	/**

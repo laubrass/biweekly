@@ -1050,6 +1050,14 @@ public class VEvent extends ICalComponent {
 		return getProperties(Attendee.class);
 	}
 
+	public void setAttendees(List<Attendee> attendees) {
+		if (null != attendees && !attendees.isEmpty()) {
+			for (Attendee attendee : attendees) {
+				addAttendee(attendee);
+			}
+		}
+	}
+
 	/**
 	 * Adds a person who is attending the event.
 	 * @param attendee the attendee
@@ -1150,6 +1158,15 @@ public class VEvent extends ICalComponent {
 		return getProperties(Comment.class);
 	}
 
+
+	public void setComments(List<Comment> comments) {
+		if (null != comments && !comments.isEmpty()) {
+			for (Comment comment : comments) {
+				addComment(comment);
+			}
+		}
+	}
+
 	/**
 	 * Adds a comment to the event.
 	 * @param comment the comment to add
@@ -1187,6 +1204,14 @@ public class VEvent extends ICalComponent {
 	 */
 	public List<Contact> getContacts() {
 		return getProperties(Contact.class);
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		if (null != contacts && !contacts.isEmpty()) {
+			for (Contact contact : contacts) {
+				addContact(contact);
+			}
+		}
 	}
 
 	/**
@@ -1228,6 +1253,14 @@ public class VEvent extends ICalComponent {
 	 */
 	public List<ExceptionDates> getExceptionDates() {
 		return getProperties(ExceptionDates.class);
+	}
+
+	public void setExceptionDates(List<ExceptionDates> exceptionDatesList) {
+		if (null != exceptionDatesList && exceptionDatesList != null) {
+			for (ExceptionDates exceptionDates : exceptionDatesList) {
+				addExceptionDates(exceptionDates);
+			}
+		}
 	}
 
 	/**
@@ -1281,6 +1314,14 @@ public class VEvent extends ICalComponent {
 		return getProperties(RelatedTo.class);
 	}
 
+	public void setRelatedTo(List<RelatedTo> relatedTos) {
+		if (null != relatedTos && !relatedTos.isEmpty()) {
+			for (RelatedTo relatedTo : relatedTos) {
+				addRelatedTo(relatedTo);
+			}
+		}
+	}
+
 	/**
 	 * Adds a component that the event is related to.
 	 * @param relatedTo the relationship
@@ -1331,6 +1372,14 @@ public class VEvent extends ICalComponent {
 	 */
 	public List<Resources> getResources() {
 		return getProperties(Resources.class);
+	}
+
+	public void setResources(List<Resources> resourcesList) {
+		if (null != resourcesList && !resourcesList.isEmpty()) {
+			for (Resources resources : resourcesList) {
+				addResources(resources);
+			}
+		}
 	}
 
 	/**
@@ -1391,6 +1440,14 @@ public class VEvent extends ICalComponent {
 	 */
 	public List<RecurrenceDates> getRecurrenceDates() {
 		return getProperties(RecurrenceDates.class);
+	}
+
+	public void setRecurrenceDates(List<RecurrenceDates> recurrenceDatesList) {
+		if (null != recurrenceDatesList && recurrenceDatesList != null) {
+			for (RecurrenceDates recurrenceDates : recurrenceDatesList) {
+				addRecurrenceDates(recurrenceDates);
+			}
+		}
 	}
 
 	/**
@@ -1548,6 +1605,13 @@ public class VEvent extends ICalComponent {
 		return getProperties(Image.class);
 	}
 
+	public void setImages(List<Image> images) {
+		if (null != images && !images.isEmpty()) {
+			for (Image image : images) {
+				addImage(image);
+			}
+		}
+	}
 	/**
 	 * Adds an image that is associated with the event.
 	 * @param image the image
@@ -1568,6 +1632,14 @@ public class VEvent extends ICalComponent {
 	 */
 	public List<Conference> getConferences() {
 		return getProperties(Conference.class);
+	}
+
+	public void setConferences(List<Conference> conferences) {
+		if (null != conferences && !conferences.isEmpty()) {
+			for (Conference conference : conferences) {
+				addConference(conference);
+			}
+		}
 	}
 
 	/**

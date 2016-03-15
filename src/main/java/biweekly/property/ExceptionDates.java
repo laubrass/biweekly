@@ -1,12 +1,12 @@
 package biweekly.property;
 
-import java.util.Date;
-import java.util.List;
-
 import biweekly.ICalVersion;
 import biweekly.Warning;
 import biweekly.component.ICalComponent;
 import biweekly.util.ICalDate;
+
+import java.util.Date;
+import java.util.List;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -68,6 +68,20 @@ import biweekly.util.ICalDate;
 public class ExceptionDates extends ListProperty<ICalDate> {
 	public ExceptionDates() {
 		//empty
+		setUid(Uid.random().getValue());
+	}
+
+	public String getUid() {
+		String uid = getParameter("Uid");
+		if (uid == null) {
+			setUid(Uid.random().getValue());
+			uid = getParameter("Uid");
+		}
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		setParameter("Uid", uid);
 	}
 
 	/**
@@ -77,6 +91,7 @@ public class ExceptionDates extends ListProperty<ICalDate> {
 	public ExceptionDates(ExceptionDates original) {
 		super(original);
 		getValues().clear();
+		setUid(Uid.random().getValue());
 		for (ICalDate date : original.getValues()) {
 			addValue(new ICalDate(date));
 		}

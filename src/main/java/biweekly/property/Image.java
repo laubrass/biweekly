@@ -1,13 +1,13 @@
 package biweekly.property;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import biweekly.ICalVersion;
 import biweekly.Warning;
 import biweekly.component.ICalComponent;
 import biweekly.parameter.Display;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -75,6 +75,10 @@ public class Image extends BinaryProperty {
 		}
 	};
 
+	public Image() {
+		super("");
+	}
+
 	/**
 	 * Creates a new attachment.
 	 * @param formatType the content-type of the data (e.g. "image/png")
@@ -137,6 +141,15 @@ public class Image extends BinaryProperty {
 	 */
 	public List<Display> getDisplays() {
 		return displays;
+	}
+
+	public void setDisplays(List<Display> displays) {
+		if (displays != null) {
+			this.displays.clear();
+			this.displays.addAll(displays);
+		} else {
+			displays.clear();
+		}
 	}
 
 	@Override

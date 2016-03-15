@@ -51,6 +51,10 @@ import biweekly.parameter.RelationshipType;
  * @see <a href="http://www.imc.org/pdi/vcal-10.doc">vCal 1.0 p.33-4</a>
  */
 public class RelatedTo extends TextProperty {
+
+	public RelatedTo() {
+		super("");
+	}
 	/**
 	 * Creates a related-to property.
 	 * @param uid the value of the {@link Uid} property of the component that

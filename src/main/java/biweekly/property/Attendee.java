@@ -1,9 +1,5 @@
 package biweekly.property;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import biweekly.ICalVersion;
 import biweekly.Warning;
 import biweekly.component.ICalComponent;
@@ -12,6 +8,10 @@ import biweekly.parameter.CalendarUserType;
 import biweekly.parameter.ParticipationLevel;
 import biweekly.parameter.ParticipationStatus;
 import biweekly.parameter.Role;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -78,6 +78,12 @@ public class Attendee extends ICalProperty {
 	private ParticipationStatus status;
 	private Boolean rsvp;
 
+	/**
+	 * Default constructor for persistence
+	 */
+	public Attendee() {
+
+	}
 	/**
 	 * Creates an attendee property.
 	 * @param name the attendee's name (e.g. "John Doe")
