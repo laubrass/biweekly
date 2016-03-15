@@ -1,37 +1,9 @@
 package biweekly.io.text;
 
-import static biweekly.ICalVersion.V1_0;
-import static biweekly.ICalVersion.V2_0;
-import static biweekly.ICalVersion.V2_0_DEPRECATED;
-import static biweekly.util.TestUtils.assertRegex;
-import static biweekly.util.TestUtils.assertValidate;
-import static biweekly.util.TestUtils.date;
-import static biweekly.util.TestUtils.each;
-import static biweekly.util.TestUtils.utc;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.TimeZone;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
 import biweekly.ICalDataType;
 import biweekly.ICalVersion;
 import biweekly.ICalendar;
-import biweekly.component.DaylightSavingsTime;
-import biweekly.component.ICalComponent;
-import biweekly.component.StandardTime;
-import biweekly.component.VAlarm;
-import biweekly.component.VEvent;
-import biweekly.component.VFreeBusy;
-import biweekly.component.VJournal;
-import biweekly.component.VTimezone;
-import biweekly.component.VTodo;
+import biweekly.component.*;
 import biweekly.io.ICalTimeZone;
 import biweekly.io.ParseContext;
 import biweekly.io.TimezoneInfo;
@@ -43,26 +15,23 @@ import biweekly.parameter.CalendarUserType;
 import biweekly.parameter.ICalParameters;
 import biweekly.parameter.ParticipationLevel;
 import biweekly.parameter.ParticipationStatus;
-import biweekly.property.Attachment;
-import biweekly.property.Attendee;
-import biweekly.property.Classification;
-import biweekly.property.Created;
-import biweekly.property.DateStart;
-import biweekly.property.FreeBusy;
-import biweekly.property.ICalProperty;
-import biweekly.property.Organizer;
-import biweekly.property.ProductId;
-import biweekly.property.SkipMeProperty;
-import biweekly.property.Status;
-import biweekly.property.Summary;
-import biweekly.property.Trigger;
-import biweekly.util.DateTimeComponents;
-import biweekly.util.Duration;
-import biweekly.util.IOUtils;
-import biweekly.util.Recurrence;
+import biweekly.property.*;
+import biweekly.util.*;
 import biweekly.util.Recurrence.DayOfWeek;
 import biweekly.util.Recurrence.Frequency;
-import biweekly.util.UtcOffset;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.TimeZone;
+
+import static biweekly.ICalVersion.*;
+import static biweekly.util.TestUtils.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -946,6 +915,7 @@ public class ICalWriterTest {
 				Trigger trigger = new Trigger(utc("1998-04-03 12:00:00"));
 				Attachment attach = new Attachment("audio/basic", "http://example.com/pub/audio-files/ssbanner.aud");
 				VAlarm alarm = VAlarm.audio(trigger, attach);
+				alarm.setUid(new Uid("121bf7c0-bf18-4d48-a137-7acbf1225680"));
 				alarm.setRepeat(4);
 				alarm.setDuration(Duration.builder().hours(1).build());
 				todo.addAlarm(alarm);

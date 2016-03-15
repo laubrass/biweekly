@@ -1,46 +1,9 @@
 package biweekly.io.text;
 
-import static biweekly.ICalVersion.V1_0;
-import static biweekly.ICalVersion.V2_0;
-import static biweekly.ICalVersion.V2_0_DEPRECATED;
-import static biweekly.util.StringUtils.NEWLINE;
-import static biweekly.util.TestUtils.assertIntEquals;
-import static biweekly.util.TestUtils.assertSize;
-import static biweekly.util.TestUtils.assertValidate;
-import static biweekly.util.TestUtils.assertVersion;
-import static biweekly.util.TestUtils.assertWarnings;
-import static biweekly.util.TestUtils.date;
-import static biweekly.util.TestUtils.utc;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.io.Writer;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.TimeZone;
-
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
 import biweekly.ICalDataType;
 import biweekly.ICalendar;
 import biweekly.Warning;
-import biweekly.component.DaylightSavingsTime;
-import biweekly.component.ICalComponent;
-import biweekly.component.RawComponent;
-import biweekly.component.StandardTime;
-import biweekly.component.VAlarm;
-import biweekly.component.VEvent;
-import biweekly.component.VFreeBusy;
-import biweekly.component.VJournal;
-import biweekly.component.VTimezone;
-import biweekly.component.VTodo;
+import biweekly.component.*;
 import biweekly.io.ICalTimeZone;
 import biweekly.io.ParseContext;
 import biweekly.io.TimezoneInfo;
@@ -49,33 +12,27 @@ import biweekly.io.scribe.component.ICalComponentScribe;
 import biweekly.io.scribe.property.CannotParseScribe;
 import biweekly.io.scribe.property.ICalPropertyScribe;
 import biweekly.io.scribe.property.SkipMeScribe;
-import biweekly.parameter.CalendarUserType;
-import biweekly.parameter.ICalParameters;
-import biweekly.parameter.ParticipationLevel;
-import biweekly.parameter.ParticipationStatus;
-import biweekly.parameter.Role;
-import biweekly.property.Attachment;
-import biweekly.property.Attendee;
-import biweekly.property.Created;
-import biweekly.property.DateEnd;
-import biweekly.property.DateStart;
-import biweekly.property.ICalProperty;
-import biweekly.property.ProductId;
-import biweekly.property.RawProperty;
-import biweekly.property.RecurrenceRule;
-import biweekly.property.Summary;
-import biweekly.property.Version;
-import biweekly.util.DateTimeComponents;
-import biweekly.util.DefaultTimezoneRule;
-import biweekly.util.Duration;
-import biweekly.util.ICalDate;
-import biweekly.util.IOUtils;
-import biweekly.util.Period;
-import biweekly.util.Recurrence;
+import biweekly.parameter.*;
+import biweekly.property.*;
+import biweekly.util.*;
 import biweekly.util.Recurrence.ByDay;
 import biweekly.util.Recurrence.DayOfWeek;
 import biweekly.util.Recurrence.Frequency;
-import biweekly.util.UtcOffset;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+
+import java.io.File;
+import java.io.Writer;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.TimeZone;
+
+import static biweekly.ICalVersion.*;
+import static biweekly.util.StringUtils.NEWLINE;
+import static biweekly.util.TestUtils.*;
+import static org.junit.Assert.*;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -886,7 +843,7 @@ public class ICalReaderTest {
 			assertVersion(V1_0, icalendar);
 
 			VAlarm valarm = icalendar.getComponent(VAlarm.class);
-			assertSize(valarm, 0, 5);
+			assertSize(valarm, 0, 6);
 			assertTrue(valarm.getAction().isAudio());
 			assertEquals(date("2014-01-01 01:00:00"), valarm.getTrigger().getDate());
 			assertEquals(new Duration.Builder().minutes(10).build(), valarm.getDuration().getValue());
@@ -928,7 +885,7 @@ public class ICalReaderTest {
 			assertVersion(V1_0, icalendar);
 
 			VAlarm valarm = icalendar.getComponent(VAlarm.class);
-			assertSize(valarm, 0, 5);
+			assertSize(valarm, 0, 6);
 			assertTrue(valarm.getAction().isDisplay());
 			assertEquals(date("2014-01-01 01:00:00"), valarm.getTrigger().getDate());
 			assertEquals(new Duration.Builder().minutes(10).build(), valarm.getDuration().getValue());
@@ -970,7 +927,7 @@ public class ICalReaderTest {
 			assertVersion(V1_0, icalendar);
 
 			VAlarm valarm = icalendar.getComponent(VAlarm.class);
-			assertSize(valarm, 0, 6);
+			assertSize(valarm, 0, 7);
 			assertTrue(valarm.getAction().isEmail());
 			assertEquals(date("2014-01-01 01:00:00"), valarm.getTrigger().getDate());
 			assertEquals(new Duration.Builder().minutes(10).build(), valarm.getDuration().getValue());
@@ -1013,7 +970,7 @@ public class ICalReaderTest {
 			assertVersion(V1_0, icalendar);
 
 			VAlarm valarm = icalendar.getComponent(VAlarm.class);
-			assertSize(valarm, 0, 5);
+			assertSize(valarm, 0, 6);
 			assertTrue(valarm.getAction().isProcedure());
 			assertEquals(date("2014-01-01 01:00:00"), valarm.getTrigger().getDate());
 			assertEquals(new Duration.Builder().minutes(10).build(), valarm.getDuration().getValue());
@@ -1627,7 +1584,7 @@ public class ICalReaderTest {
 
 			{
 				VAlarm alarm = todo.getAlarms().get(0);
-				assertSize(alarm, 0, 5);
+				assertSize(alarm, 0, 6);
 
 				assertTrue(alarm.getAction().isAudio());
 				assertEquals(utc("1998-04-03 12:00:00"), alarm.getTrigger().getDate());

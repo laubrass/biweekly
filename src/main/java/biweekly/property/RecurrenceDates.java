@@ -76,6 +76,7 @@ import java.util.*;
 public class RecurrenceDates extends ICalProperty {
 	private final List<ICalDate> dates;
 	private final List<Period> periods;
+	private String uid;
 
 	public RecurrenceDates() {
 		dates = new ArrayList<ICalDate>();
@@ -84,16 +85,14 @@ public class RecurrenceDates extends ICalProperty {
 	}
 
 	public String getUid() {
-		String uid = getParameter("Uid");
 		if (uid == null) {
 			setUid(Uid.random().getValue());
-			uid = getParameter("Uid");
 		}
 		return uid;
 	}
 
 	public void setUid(String uid) {
-		setParameter("Uid", uid);
+		this.uid = uid;
 	}
 
 	/**
@@ -124,7 +123,7 @@ public class RecurrenceDates extends ICalProperty {
 	}
 
 	public List<Timestamp> getConvertedDates() {
-		List<Timestamp> stamps = new ArrayList<>();
+		List<Timestamp> stamps = new ArrayList<Timestamp>();
 		for (ICalDate date : dates) {
 			stamps.add(Timestamp.from(date.toInstant()));
 		}

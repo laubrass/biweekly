@@ -119,7 +119,7 @@ public class RecurrenceDatesTest {
 	@Test
 	public void copy() {
 		RecurrenceDates original = new RecurrenceDates();
-		assertCopy(original).notSameDeep("getDates").notSameDeep("getPeriods");
+        assertCopy(original).notSameDeep("getDates").notSameDeep("getPeriods");
 
 		original = new RecurrenceDates();
 		original.addDate(new Date());
