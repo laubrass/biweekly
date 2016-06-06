@@ -1,22 +1,18 @@
 package biweekly.component;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import biweekly.ICalDataType;
-import biweekly.ICalVersion;
-import biweekly.ICalendar;
-import biweekly.Messages;
+import biweekly.*;
 import biweekly.ValidationWarnings.WarningsGroup;
-import biweekly.Warning;
 import biweekly.property.ICalProperty;
 import biweekly.property.RawProperty;
 import biweekly.property.Status;
 import biweekly.util.ListMultimap;
 import biweekly.util.StringUtils;
+
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /*
  Copyright (c) 2013-2016, Michael Angstadt
@@ -169,6 +165,15 @@ public abstract class ICalComponent {
 	public <T extends ICalComponent> List<T> removeComponents(Class<T> clazz) {
 		List<ICalComponent> removed = components.removeAll(clazz);
 		return castList(removed, clazz);
+	}
+
+	public void setExperimentalProperties(List<RawProperty> experimentalProperties) {
+		this.removeProperties(RawProperty.class);
+		if (experimentalProperties != null && !experimentalProperties.isEmpty()) {
+			for (RawProperty rawProperty : experimentalProperties) {
+				this.addProperty(rawProperty);
+			}
+		}
 	}
 
 	/**
