@@ -1087,6 +1087,14 @@ public class VEvent extends ICalComponent {
 		return prop;
 	}
 
+	public void setCategories(List<Categories> categories) {
+		if (null != categories && !categories.isEmpty()) {
+			for (Categories category : categories) {
+				addCategories(category);
+			}
+		}
+	}
+
 	/**
 	 * Gets a list of "tags" or "keywords" that describe the event.
 	 * @return the categories (this list is immutable)
